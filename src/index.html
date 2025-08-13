@@ -1,0 +1,148 @@
+<!doctype html>
+<!--
+    Build information
+    Version: Development
+    Build Date: Dynamic
+-->
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta property="Description" content="Free and open source air traffic control simulator"/>
+        <meta property="og:title" content="openScope Air Traffic Control Simulator"/>
+        <meta property="og:description" content="Free and open source air traffic control simulator"/>
+        <meta property="og:url" content="http://openscope.io" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:image" content="assets/images/thumb.png"/>
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="openScope" />
+
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/assets/images/favicon/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="apple-touch-icon" sizes="57x57" href="/assets/images/favicon/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/assets/images/favicon/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/assets/images/favicon/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/assets/images/favicon/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/assets/images/favicon/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/assets/images/favicon/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/assets/images/favicon/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/assets/images/favicon/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/favicon/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/assets/images/favicon/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+
+        <title>openScope Air Traffic Control Simulator</title>
+
+        <!-- Vite will inject styles here -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91575400-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-91575400-1');
+        </script>
+    </head>
+    <body>
+        <!-- Main application content -->
+        <div id="canvases"></div>
+        <div id="log"></div>
+
+        <!-- Strip View -->
+        <div id="sidebar" class="stripView js-stripView mix-stripView_isHidden">
+            <div class="stripView-trigger js-stripView-trigger"></div>
+            <div class="stripTitle">Arrivals / Overflights</div>
+            <ul class='stripView-list nice-scrollbar js-stripViewArrivals-list'></ul>
+            <div class="stripTitle">Departures</div>
+            <ul class='stripView-list nice-scrollbar js-stripViewDepartures-list'></ul>
+        </div>
+
+        <!-- Footer -->
+        <div id="footer" class="footer">
+            <span class="footer-version js-footer-version"></span>
+            <div class="footer-right">
+                <a href="https://github.com/openscope/openscope" target="_blank" class="footer-github">
+                    <img class="footer-github-image" alt="GitHub" src="assets/images/GitHub_Logo_White.png">
+                </a>
+                <a href="https://openscope.slack.com" target="_blank" class="footer-slack">
+                    <img class="footer-slack-image" alt="Slack" src="assets/images/Slack_Mark_Monochrome_White_36px.png">
+                </a>
+            </div>
+        </div>
+
+        <!-- Airport Switch Modal -->
+        <div class="dialog js-airportSwitchDialog mix-dialog_isHidden" data-airport-switch-element="root">
+            <div class="dialog-content">
+                <div class="dialog-body" data-airport-switch-element="container"></div>
+                <div class="dialog-footer">
+                    <button type="button" class="dialog-button dialog-button_default js-airportSwitchDialog-submit-button">Load</button>
+                    <button type="button" class="dialog-button dialog-button_cancel js-airportSwitchDialog-close-button">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Airport Guide Modal -->
+        <div class="airportGuide js-airportGuide mix-airportGuide_isHidden" data-airport-guide-element="root">
+            <div class="airportGuide-content">
+                <div class="airportGuide-header">
+                    <h1 class="airportGuide-title js-airportGuide-title"></h1>
+                    <button type="button" class="airportGuide-close js-airportGuide-close">×</button>
+                </div>
+                <div class="airportGuide-body js-airportGuide-body"></div>
+            </div>
+        </div>
+
+        <!-- Changelog Modal -->
+        <div class="changelog js-changelog mix-changelog_isHidden" data-changelog-element="root">
+            <div class="changelog-content">
+                <div class="changelog-header">
+                    <h1 class="changelog-title">What's New</h1>
+                    <button type="button" class="changelog-close js-changelog-close">×</button>
+                </div>
+                <div class="changelog-body js-changelog-body"></div>
+            </div>
+        </div>
+
+        <!-- Paused Modal -->
+        <div class="paused js-pausedView mix-paused_isHidden" data-paused-element="root">
+            <div class="paused-content">
+                <h1 class="paused-title">Simulation Paused</h1>
+                <p class="paused-description">Press SPACE or ESC to resume</p>
+            </div>
+        </div>
+
+        <!-- Loading View -->
+        <div class="loadingView js-loadingView mix-loadingView_isHidden" data-loading-element="root">
+            <div class="loadingView-content">
+                <img src="assets/images/openscope-radar-sweep.gif" alt="Loading..." class="loadingView-animation">
+                <h1 class="loadingView-title">Loading...</h1>
+                <p class="loadingView-description js-loadingView-message">Initializing application</p>
+            </div>
+        </div>
+
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-57858722-1', 'auto');
+            ga('create', 'UA-91575400-1', { 'name': 'openscope' });
+
+            ga('send', 'pageview');
+            ga('openscope.send', 'pageview', location.host);
+        </script>
+        <script>
+            window.GLOBAL = {
+                VERSION: 'development'
+            };
+        </script>
+
+        <!-- Vite will inject the app script here -->
+        <script type="module" src="/assets/scripts/client/index.js"></script>
+        <link rel="stylesheet" href="/assets/style/main.less">
+    </body>
+</html>

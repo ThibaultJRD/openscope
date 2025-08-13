@@ -4,18 +4,28 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Common Development Commands
 
-### Build and Development
-- `npm run build` - Production build with minification and optimization
-- `npm run build:dev` - Development build without optimization
-- `npm run start` - Start the development server on port 3003
-- `gulp build` - Alternative build command using Gulp
-- `gulp build --prod` - Production build via Gulp
+⚡ **This project uses Yarn for dependency management and Vite for modern build tooling.**
+
+### Package Management
+- `yarn install` - Install all dependencies
+- `yarn add <package>` - Add new dependency
+- `yarn add --dev <package>` - Add new dev dependency
+
+### Build and Development (Modern - Vite)
+- `yarn dev` - Start development server with Hot Module Replacement (HMR)
+- `yarn build` - Production build with Vite (includes custom asset generation)
+- `yarn preview` - Preview production build locally
+- `yarn start` - Start the Express server (serves built assets)
+
+### Build and Development (Legacy - Gulp)
+- `yarn build:gulp` - Production build via Gulp (legacy, use yarn build instead)
+- `yarn build:dev:gulp` - Development build via Gulp (legacy)
 
 ### Testing and Quality
-- `npm test` - Run all tests with coverage using AVA test runner
-- `npm run lint` - Lint client-side code using ESLint with Airbnb config
-- `npm run lint-diff` - Lint only changed files
-- `npm run validator` - Validate airport and configuration JSON files
+- `yarn test` - Run all tests with coverage using AVA test runner
+- `yarn lint` - Lint client-side code using ESLint with Airbnb config
+- `yarn lint-diff` - Lint only changed files
+- `yarn validator` - Validate airport and configuration JSON files
 
 ### Development Workflow
 - Tests are located in `test/` directory with `.spec.js` extension

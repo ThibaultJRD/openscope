@@ -19,7 +19,7 @@ const prop = {};
 //
 // This will need to be re-worked, and current global functions should be exported and
 // imported as needed in each file.
-require('./util');
+import './util';
 
 // are you using a main loop? (you must call update() afterward disable/re-enable)
 let UPDATE = true;
