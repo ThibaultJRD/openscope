@@ -85,23 +85,17 @@ function _writeFileOutput(input) {
     const filePathToWrite = path.join(options.DIR.DIST_GUIDES, 'guides.json');
     const jsonOutput = JSON.stringify(input);
 
-    mkdirp(options.DIR.DIST_GUIDES, (err) => {
-        if (err) {
-            fancyLog(colors.red(`--- Failed to create ${options.DIR.DIST_GUIDES}`));
+    try {
+        // create destination directory, with parents, if it doesn't exist (synchronous in mkdirp v3+)
+        mkdirp.sync(options.DIR.DIST_GUIDES);
 
-            return Promise.reject(err);
-        }
-
-        fs.writeFile(filePathToWrite, jsonOutput, (writeFileError) => {
-            if (writeFileError) {
-                fancyLog(colors.red('--- Failed to write guidefile guides.json'));
-
-                return Promise.reject(writeFileError);
-            }
-
-            fancyLog(colors.green('--- sucessfully created guides.json'));
-        });
-    });
+        // write the new file
+        fs.writeFileSync(filePathToWrite, jsonOutput);
+        fancyLog(colors.green('--- sucessfully created guides.json'));
+    } catch (error) {
+        fancyLog(colors.red(`--- Failed to create ${options.DIR.DIST_GUIDES} or write guides.json`));
+        throw error;
+    }
 }
 
 /**

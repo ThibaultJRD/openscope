@@ -4,7 +4,8 @@
 module.exports = function(gulp, config) {
     const sourcemaps = require('gulp-sourcemaps');
     const less = require('gulp-less');
-    const autoprefixer = require('gulp-autoprefixer');
+    const autoprefixer = require('autoprefixer');
+    const postcss = require('gulp-postcss');
     const cleanCSS = require('gulp-clean-css');
     const concat = require('gulp-concat');
     const OPTIONS = config;
@@ -12,10 +13,7 @@ module.exports = function(gulp, config) {
     const buildStyles = () => gulp.src(OPTIONS.FILE.CSS_MAIN)
         .pipe(sourcemaps.init())
         .pipe(less())
-        .pipe(autoprefixer({
-            browsers: ['last 2 versions'],
-            cascade: false
-        }))
+        .pipe(postcss([autoprefixer]))
         .pipe(cleanCSS({compatibility: 'ie11'}))
         .pipe(concat('main.min.css'))
         .pipe(sourcemaps.write('.'))

@@ -4,7 +4,13 @@
         "node": true,
         "browser": true
     },
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
+    "parserOptions": {
+        "requireConfigFile": false,
+        "babelOptions": {
+            "presets": ["@babel/preset-env"]
+        }
+    },
     "rules": {
         "arrow-body-style": 0,
         "arrow-parens": [2, "always"],
@@ -24,9 +30,6 @@
         "no-continue": 0,
         "no-else-return": [2, {"allowElseIf": true}],
         "no-unused-vars": [2, { "argsIgnorePattern": "event|error" }],
-
-        "# The rules below are only included to get through the first rounds of refactor. the": "",
-        "# rules should be re-implemented and errors addressed at a later date": "",
         "block-scoped-var": 0,
         "consistent-return": 0,
         "func-names": 0,

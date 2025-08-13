@@ -61,19 +61,15 @@ function _createDestinationDirAndFile(destination, outputFilename, data) {
     // create an object with a dynamic key and add the result list to it
     const jsonOutput = JSON.stringify({ [rootKey]: data });
 
-    // create `destination` directory, with parents, if it doesnt exist
-    mkdirp(destination, (error) => {
-        if (error) {
-            return Promise.reject(error);
-        }
+    try {
+        // create `destination` directory, with parents, if it doesnt exist (synchronous in mkdirp v3+)
+        mkdirp.sync(destination);
 
         // write the new file
-        fs.writeFile(outFilenameWithPath, jsonOutput, (error) => {
-            if (error) {
-                return Promise.reject(error);
-            }
-        });
-    });
+        fs.writeFileSync(outFilenameWithPath, jsonOutput);
+    } catch (error) {
+        throw error;
+    }
 }
 
 /**
