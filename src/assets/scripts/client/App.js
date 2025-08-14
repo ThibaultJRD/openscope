@@ -8,18 +8,17 @@ import { DEFAULT_AIRPORT_ICAO } from './constants/airportConstants';
 import { STORAGE_KEY } from './constants/storageKeys';
 import { EVENT } from './constants/eventNames';
 import { LOG } from './constants/logLevel';
+// IIEFs are pulled in here to add functions to the global space.
+//
+// This will need to be re-worked, and current global functions should be exported and
+// imported as needed in each file.
+import './util';
 
 window.zlsa = {};
 window.zlsa.atc = {};
 
 // TODO: KILL THE PROP!
 const prop = {};
-
-// IIEFs are pulled in here to add functions to the global space.
-//
-// This will need to be re-worked, and current global functions should be exported and
-// imported as needed in each file.
-import './util';
 
 // are you using a main loop? (you must call update() afterward disable/re-enable)
 let UPDATE = true;

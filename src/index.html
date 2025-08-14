@@ -123,6 +123,152 @@
             </div>
         </div>
 
+        <!-- Command Input and UI Controls -->
+        <div class="footer">
+            <div id="autocomplete">
+                <div id="autocomplete-spacer"></div>
+                <div id="autocomplete-ui">
+                    <div id="autocomplete-popup" class="notSelectable">
+                        <div id="autocomplete-legend">
+                            Legend: <b>alias</b> | <u>argument</u> | <i>optional</i>
+                        </div>
+                        <div id="autocomplete-suggests"></div>
+                        <div id="autocomplete-instruction">
+                            <span id="autocomplete-instruction-navigate">[↑/↓] to navigate</span>
+                            <span id="autocomplete-instruction-select">[tab] to select</span>
+                            <span id="autocomplete-instruction-commit">[tab] to commit</span>
+                            <span id="autocomplete-instruction-revert">[esc] to go back</span>
+                            <span id="autocomplete-instruction-cancel">[esc] to cancel</span>
+                        </div>
+                    </div>
+                    <div id="autocomplete-footer">
+                        <input id="autocomplete-output" size="1" disabled="disabled" />
+                        <input id="autocomplete-input" size="15" placeholder="search commands" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" />
+                        <span id="autocomplete-footer-fade"></span>
+                    </div>
+                </div>
+            </div>
+
+            <input id="command"
+                   placeholder="enter aircraft command"
+                   autocapitalize="off"
+                   autocorrect="off"
+                   autocomplete="off"
+                   spellcheck="false"
+                   autofocus />
+
+            <ul class="controls-menu">
+                <li class="control-item">
+                    <a class="control-icon fast-forwards">
+                        <img src="assets/images/icons/fast-forwards.png" />
+                    </a>
+                </li>
+                <li class="control-item">
+                    <a class="control-icon toggle-pause" title="Pause simulation">
+                        <img src="assets/images/icons/pause.png" />
+                    </a>
+                </li>
+                <li class="control-item">
+                    <a class="control-icon switch-airport" title="Switch airport">
+                        <img src="assets/images/icons/airport.png" />
+                    </a>
+                </li>
+                <li class="control-item">
+                    <a class="control-icon">
+                        <img src="assets/images/icons/scope.png" />
+                    </a>
+                    <div class="control-item-content">
+                        <a class="control toggle-labels">
+                            <img src="assets/images/icons/labels.png" />
+                            <span>Fixes & Runways</span>
+                        </a>
+                        <a class="control toggle-sids">
+                            <img src="assets/images/icons/sids.png" />
+                            <span>SID display</span>
+                        </a>
+                        <a class="control toggle-stars">
+                            <img src="assets/images/icons/stars.png" />
+                            <span>STAR display</span>
+                        </a>
+                        <a class="control toggle-airspace">
+                            <img src="assets/images/icons/airspace.png" />
+                            <span>Airspace Depiction</span>
+                        </a>
+                        <a class="control toggle-restricted-areas">
+                            <img src="assets/images/icons/restricted.png" />
+                            <span>Restricted Areas</span>
+                        </a>
+                        <a class="control toggle-terrain active">
+                            <img src="assets/images/icons/terrain.png" />
+                            <span>Terrain</span>
+                        </a>
+                        <a class="control toggle-video-map">
+                            <img src="assets/images/icons/map.png" />
+                            <span>Video Maps</span>
+                        </a>
+                    </div>
+                </li>
+                <li class="control-item">
+                    <a class="control-icon">
+                        <img src="assets/images/icons/cog.png" />
+                    </a>
+                    <div class="control-item-content">
+                        <a class="control" id="toggle-options">
+                            <img src="assets/images/icons/cog.png" />
+                            <span>Settings</span>
+                        </a>
+                        <a class="control toggle-speech">
+                            <img src="assets/images/icons/speech.png" />
+                            <span>Speech</span>
+                        </a>
+                        <a class="control toggle-traffic">
+                            <img src="assets/images/icons/traffic.png" />
+                            <span>Traffic</span>
+                        </a>
+                    </div>
+                </li>
+                <li class="control-item">
+                    <a class="control-icon">
+                        <img src="assets/images/icons/questionmark.png" />
+                    </a>
+                    <div class="control-item-content">
+                        <a class="control toggle-airport-guide">
+                            <img src="assets/images/icons/airport-guide.png" />
+                            <span>Airport Guide</span>
+                        </a>
+                        <a class="control" href="https://github.com/openscope/openscope/blob/develop/documentation/commands.md" target="_blank">
+                            <img src="assets/images/icons/command-reference.png"/>
+                            <span>Commands</span>
+                        </a>
+                        <a class="control toggle-tutorial">
+                            <img src="assets/images/icons/tutorial.png" />
+                            <span>Tutorial</span>
+                        </a>
+                        <a class="control js-changelogToggle">
+                            <img src="assets/images/icons/changelog.png" />
+                            <span>Changelog</span>
+                        </a>
+                        <a class="control" href="https://join.slack.com/t/openscopeatc/shared_invite/zt-g9wq2mch-B7Z9IltlgxgCBC2dBYPjiw" target="_blank">
+                            <img src="assets/images/Slack_Mark_Monochrome_White_36px.png"/>
+                            <span>Chat With Us</span>
+                        </a>
+                        <a class="control" href="https://github.com/openscope/openscope" id="js-github-external-link" target="_blank">
+                            <img src="assets/images/GitHub-Mark-Light-32px.png" class="github-logo" />
+                            <span>GitHub</span>
+                        </a>
+                    </div>
+                </li>
+                <li class="control-item">
+                    <a class="control-icon">
+                        <div id="score" class="notSelectable" title="Score">-</div>
+                    </a>
+                    <div class="control-item-content wide">
+                        <ul id="score-log" class="nice-scrollbar"></ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -137,7 +283,7 @@
         </script>
         <script>
             window.GLOBAL = {
-                VERSION: 'development'
+                VERSION: '6.29.0-BETA'
             };
         </script>
 

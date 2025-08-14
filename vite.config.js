@@ -4,11 +4,11 @@ import eslint from 'vite-plugin-eslint';
 import path from 'path';
 
 export default defineConfig({
-  // Configuration des chemins
+  // Path configuration
   root: './src',
   publicDir: '../assets',
   
-  // Configuration du build
+  // Build configuration
   build: {
     outDir: '../public',
     emptyOutDir: false,
@@ -32,16 +32,16 @@ export default defineConfig({
     }
   },
 
-  // Configuration pour définir les globals
+  // Global definitions configuration
   define: {
     global: 'globalThis',
   },
 
-  // Configuration du serveur de développement
+  // Development server configuration
   server: {
     port: 3003,
     proxy: {
-      // Proxy vers le serveur Express si nécessaire
+      // Proxy to Express server if needed
       '/api': {
         target: 'http://localhost:3004',
         changeOrigin: true
@@ -49,21 +49,21 @@ export default defineConfig({
     }
   },
 
-  // Configuration des plugins
+  // Plugins configuration
   plugins: [
-    // Support des navigateurs legacy (IE11+)
+    // Legacy browser support (IE11+)
     legacy({
       targets: ['ie >= 11'],
       additionalLegacyPolyfills: ['regenerator-runtime/runtime']
     }),
 
-    // Support ESLint (désactivé en production pour éviter les erreurs du code existant)
+    // ESLint support (disabled in production to avoid existing code errors)
     ...(process.env.NODE_ENV !== 'production' ? [eslint({
       include: ['src/**/*.js']
     })] : [])
   ],
 
-  // Configuration des résolutions de modules
+  // Module resolution configuration
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
@@ -72,11 +72,11 @@ export default defineConfig({
     }
   },
 
-  // Configuration CSS
+  // CSS configuration
   css: {
     preprocessorOptions: {
       less: {
-        // Options LESS si nécessaires
+        // LESS options if needed
         javascriptEnabled: true
       }
     }

@@ -78,6 +78,7 @@ export default class ChangelogController {
         this.content = '<p>Loading...</p>';
         this.contentQueue = contentQueue;
         this._eventBus = EventBus;
+        this.version = window.GLOBAL ? window.GLOBAL.VERSION : 'unknown';
 
         this._createChildren();
         this.$changelogData.html(this.content);
